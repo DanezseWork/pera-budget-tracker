@@ -281,7 +281,7 @@ const Hero: React.FC<{ heroClassName?: string; onTryForFree?: () => void }> = ({
 }) => {
     return (
         <section
-            className="min-h-screen flex items-center justify-center px-4 pt-32 pb-24 md:pt-40 md:pb-32"
+            className="min-h-screen flex items-center justify-center px-4 pt-32 pb-24 md:pt-40 md:pb-32 bg-yellow"
             aria-labelledby="hero-heading"
         >
             <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
@@ -336,9 +336,7 @@ const Hero: React.FC<{ heroClassName?: string; onTryForFree?: () => void }> = ({
                         onClick={() => onTryForFree?.()}
                     >
                         Try for Free
-                    </Button>
-
-                    <InteractiveHoverButton text="Try for Free" />
+                    </Button>               
                 </div>
             </div>
         </section>
@@ -352,7 +350,7 @@ const Component: React.FC<ComponentProps> = ({
     onTryForFree,
 }) => {
     return (
-        <div className="min-h-screen bg-background text-foreground">
+        <div className="min-h-screen text-foreground">
             <LocalStyles />
             <Navigation brand={brand} onSignIn={onSignIn} />
             <Hero heroClassName={heroClassName} onTryForFree={onTryForFree} />

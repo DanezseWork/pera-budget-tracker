@@ -56,9 +56,9 @@ export default function Demo() {
             {message && <div className="demo-message">{message}</div>}
 
             {/* MAIN WRAPPER */}
-            <div className="demo-container">
+            <div className="demo-container min-h-screen">
                 {/* BACKGROUND DOTS */}
-                <div className="dot-grid-backdrop">
+                <div className="dot-grid-backdrop min-h-screen">
                     <DotGrid
                         dotSize={3}
                         gap={15}
