@@ -8,7 +8,7 @@
 <p align="center">A personal budget tracking application built with Laravel Breeze.</p>
 
 <p align="center">
-  <a href="https://github.com/your-username/pera-budget-tracker/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+  <a href="https://github.com/DanezseWork/pera-budget-tracker/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
   <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
   <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
@@ -38,7 +38,7 @@
 1. Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-username/pera-budget-tracker.git
+git clone https://github.com/DanezseWork/pera-budget-tracker.git
 ```
 
 2. Install dependencies:
