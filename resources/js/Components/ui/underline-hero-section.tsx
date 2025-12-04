@@ -121,7 +121,6 @@ interface ComponentProps {
     brand?: string;
     heroClassName?: string;
     onSignIn?: () => void;
-    onTryForFree?: () => void;
 }
 
 const Navigation: React.FC<{ brand?: string; onSignIn?: () => void }> = ({
@@ -275,10 +274,7 @@ const Navigation: React.FC<{ brand?: string; onSignIn?: () => void }> = ({
     );
 };
 
-const Hero: React.FC<{ heroClassName?: string; onTryForFree?: () => void }> = ({
-    heroClassName,
-    onTryForFree,
-}) => {
+const Hero: React.FC<{ heroClassName?: string }> = ({ heroClassName }) => {
     return (
         <section
             className="min-h-screen flex items-center justify-center px-4 pt-32 pb-24 md:pt-40 md:pb-32 bg-yellow"
@@ -328,16 +324,15 @@ const Hero: React.FC<{ heroClassName?: string; onTryForFree?: () => void }> = ({
                     </p>
                 </div>
 
-                <div className="animate-fade-in-up animate-fade-in-up-delay-2">
+                <Link href={route("register")}>
                     <Button
                         size="lg"
                         variant="default"
                         className="px-8 py-6 text-base rounded-lg focus-outline"
-                        onClick={() => onTryForFree?.()}
                     >
                         Try for Free
-                    </Button>               
-                </div>
+                    </Button>
+                </Link>
             </div>
         </section>
     );
@@ -347,13 +342,12 @@ const Component: React.FC<ComponentProps> = ({
     brand = "SaaS",
     heroClassName,
     onSignIn,
-    onTryForFree,
 }) => {
     return (
         <div className="min-h-screen text-foreground">
             <LocalStyles />
             <Navigation brand={brand} onSignIn={onSignIn} />
-            <Hero heroClassName={heroClassName} onTryForFree={onTryForFree} />
+            <Hero heroClassName={heroClassName} />
         </div>
     );
 };
