@@ -20,15 +20,35 @@ import {
     User,
 } from "lucide-react";
 import Dropdown from "@/Components/Dropdown";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/Components/line-charts-2"; 
-// adjust the path based on where your file is located
+import {
+    ChartContainer,
+    ChartTooltip,
+    ChartTooltipContent,
+} from "@/Components/line-charts-2";
+import {
+    Dialog,
+    DialogTrigger,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+    DialogFooter,
+    DialogClose,
+} from "@/Components/ui/dialog";
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+} from "recharts";
 
 const data = [
-  { name: "Jan", revenue: 4000 },
-  { name: "Feb", revenue: 3000 },
-  { name: "Mar", revenue: 5000 },
+    { name: "Jan", revenue: 4000 },
+    { name: "Feb", revenue: 3000 },
+    { name: "Mar", revenue: 5000 },
 ];
 
 export const Example = () => {
@@ -154,7 +174,14 @@ type OptionProps = {
     notifs?: number; // optional
 };
 
-const Option = ({ Icon, title, selected, setSelected, open, notifs }: OptionProps) => {
+const Option = ({
+    Icon,
+    title,
+    selected,
+    setSelected,
+    open,
+    notifs,
+}: OptionProps) => {
     const isSelected = selected === title;
 
     return (
@@ -334,6 +361,91 @@ const ExampleContent = ({ isDark, setIsDark }: ExampleContentProps) => {
                 </div>
             </div>
 
+            <Dialog>
+                <DialogTrigger className="px-4 py-2 bg-primary text-white rounded">
+                    Add Wallet
+                </DialogTrigger>
+
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Add Wallet</DialogTitle>
+                        <DialogDescription>
+                            Create a new wallet and set up its initial details.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    {/* FORM CONTENT */}
+                    <div className="space-y-4 py-2">
+                        {/* Wallet Name */}
+                        <div>
+                            <label className="text-sm font-medium">
+                                Wallet Name
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter wallet name"
+                                className="w-full border rounded p-2 mt-1"
+                            />
+                        </div>
+
+                        {/* Initial Value */}
+                        <div>
+                            <label className="text-sm font-medium">
+                                Initial Value
+                            </label>
+                            <input
+                                type="number"
+                                placeholder="₱0.00"
+                                className="w-full border rounded p-2 mt-1"
+                            />
+                        </div>
+
+                        {/* Wallet Icon */}
+                        <div>
+                            <label className="text-sm font-medium">
+                                Wallet Icon
+                            </label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="w-full border rounded p-2 mt-1"
+                            />
+                        </div>
+
+                        {/* Wallet Color */}
+                        <div>
+                            <label className="text-sm font-medium">
+                                Wallet Color
+                            </label>
+                            <input
+                                type="color"
+                                className="w-full h-10 border rounded mt-1 cursor-pointer"
+                            />
+                        </div>
+
+                        {/* Wallet Description */}
+                        <div>
+                            <label className="text-sm font-medium">
+                                Wallet Description
+                            </label>
+                            <textarea
+                                placeholder="Optional description"
+                                className="w-full border rounded p-2 mt-1 h-20"
+                            />
+                        </div>
+                    </div>
+
+                    <DialogFooter>
+                        <DialogClose className="px-4 py-2 bg-secondary rounded">
+                            Cancel
+                        </DialogClose>
+                        <button className="px-4 py-2 bg-primary text-white rounded">
+                            Save Wallet
+                        </button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div className="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-shadow">
@@ -408,24 +520,29 @@ const ExampleContent = ({ isDark, setIsDark }: ExampleContentProps) => {
                     </p>
                 </div>
             </div>
-            
-    <ChartContainer
-      config={{
-        revenue: {
-          label: "Revenue",
-          color: "green", // using Tailwind blue-500
-        },
-      }}
-      className="w-full h-[300px]" // size
-    >
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip content={<ChartTooltipContent />} />  {/* custom tooltip */}
-        <Line type="monotone" dataKey="revenue" stroke="var(--color-revenue)" />
-      </LineChart>
-    </ChartContainer>
+
+            <ChartContainer
+                config={{
+                    revenue: {
+                        label: "Revenue",
+                        color: "green", // using Tailwind blue-500
+                    },
+                }}
+                className="w-full h-[300px]" // size
+            >
+                <LineChart data={data}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip content={<ChartTooltipContent />} />{" "}
+                    {/* custom tooltip */}
+                    <Line
+                        type="monotone"
+                        dataKey="revenue"
+                        stroke="var(--color-revenue)"
+                    />
+                </LineChart>
+            </ChartContainer>
 
             {/* Content Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
