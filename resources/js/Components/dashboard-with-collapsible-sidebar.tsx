@@ -35,6 +35,7 @@ import {
     DialogFooter,
     DialogClose,
 } from "@/Components/ui/dialog";
+import AddWalletModal from "@/Components/Wallets/AddWalletModal";
 
 import {
     LineChart,
@@ -361,90 +362,8 @@ const ExampleContent = ({ isDark, setIsDark }: ExampleContentProps) => {
                 </div>
             </div>
 
-            <Dialog>
-                <DialogTrigger className="px-4 py-2 bg-primary text-white rounded">
-                    Add Wallet
-                </DialogTrigger>
-
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Add Wallet</DialogTitle>
-                        <DialogDescription>
-                            Create a new wallet and set up its initial details.
-                        </DialogDescription>
-                    </DialogHeader>
-
-                    {/* FORM CONTENT */}
-                    <div className="space-y-4 py-2">
-                        {/* Wallet Name */}
-                        <div>
-                            <label className="text-sm font-medium">
-                                Wallet Name
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Enter wallet name"
-                                className="w-full border rounded p-2 mt-1"
-                            />
-                        </div>
-
-                        {/* Initial Value */}
-                        <div>
-                            <label className="text-sm font-medium">
-                                Initial Value
-                            </label>
-                            <input
-                                type="number"
-                                placeholder="₱0.00"
-                                className="w-full border rounded p-2 mt-1"
-                            />
-                        </div>
-
-                        {/* Wallet Icon */}
-                        <div>
-                            <label className="text-sm font-medium">
-                                Wallet Icon
-                            </label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                className="w-full border rounded p-2 mt-1"
-                            />
-                        </div>
-
-                        {/* Wallet Color */}
-                        <div>
-                            <label className="text-sm font-medium">
-                                Wallet Color
-                            </label>
-                            <input
-                                type="color"
-                                className="w-full h-10 border rounded mt-1 cursor-pointer"
-                            />
-                        </div>
-
-                        {/* Wallet Description */}
-                        <div>
-                            <label className="text-sm font-medium">
-                                Wallet Description
-                            </label>
-                            <textarea
-                                placeholder="Optional description"
-                                className="w-full border rounded p-2 mt-1 h-20"
-                            />
-                        </div>
-                    </div>
-
-                    <DialogFooter>
-                        <DialogClose className="px-4 py-2 bg-secondary rounded">
-                            Cancel
-                        </DialogClose>
-                        <button className="px-4 py-2 bg-primary text-white rounded">
-                            Save Wallet
-                        </button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
+            {/* Add Wallet Modal */}
+            <AddWalletModal />
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

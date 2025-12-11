@@ -10,12 +10,13 @@ class Transaction extends Model
         'amount',
         'type',
         'category_id',
-        'account_id',
+        'wallet_id',  // <-- NEW
         'user_id',
         'date',
         'description'
     ];
 
+    // Relationships
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -26,8 +27,33 @@ class Transaction extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function account()
+    public function wallet()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Wallet::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($transaction) {
+            $wallet = $transaction->wallet;
+
+            if ($transaction->type === 'income') {
+                $wallet->increment('current_balance', $transaction->amount);
+            } else {
+                $wallet->decrement('current_balance', $transaction->amount);
+            }
+        });
+
+        static::deleted(function ($transaction) {
+            $wallet = $transaction->wallet;
+
+            if ($transaction->type === 'income') {
+                $wallet->decrement('current_balance', $transaction->amount);
+            } else {
+                $wallet->increment('current_balance', $transaction->amount);
+            }
+        });
     }
 }
