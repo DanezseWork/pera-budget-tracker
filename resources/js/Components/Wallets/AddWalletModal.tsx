@@ -11,16 +11,27 @@ import {
 } from "@/Components/ui/dialog";
 import { toaster } from "@/Components/ToastProvider";
 
-export default function AddWalletModal() {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: "",
-        starting_balance: "",
-        icon: null,
-        color: "#000000",
-        description: "",
-    });
+interface WalletForm {
+    name: string;
+    starting_balance: string;
+    icon: File | null;
+    color: string;
+    description: string;
+}
 
-    const submit = (e) => {
+export default function AddWalletModal() {
+    const { data, setData, post, processing, errors, reset } =
+        useForm<WalletForm>({
+            name: "",
+            starting_balance: "",
+            icon: null as File | null,
+            color: "#000000",
+            description: "",
+        });
+
+    const typedErrors = errors as Record<keyof WalletForm, string | undefined>;
+
+    const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         post(route("wallets.store"), {
             onSuccess: () => {
@@ -65,14 +76,17 @@ export default function AddWalletModal() {
                         <input
                             type="text"
                             value={data.name}
-                            onChange={(e) => setData("name", e.target.value)}
+                            onChange={(e) =>
+                                setData((prev) => ({
+                                    ...prev,
+                                    name: e.target.value,
+                                }))
+                            }
                             placeholder="Enter wallet name"
                             className="w-full border rounded p-2 mt-1"
                         />
-                        {errors.name && (
-                            <p className="text-red-500 text-sm">
-                                {errors.name}
-                            </p>
+                        {typedErrors.name && (
+                            <p className="text-red-500">{typedErrors.name}</p>
                         )}
                     </div>
 
@@ -85,7 +99,10 @@ export default function AddWalletModal() {
                             type="number"
                             value={data.starting_balance}
                             onChange={(e) =>
-                                setData("starting_balance", e.target.value)
+                                setData((prev) => ({
+                                    ...prev,
+                                    starting_balance: e.target.value,
+                                }))
                             }
                             placeholder="₱0.00"
                             className="w-full border rounded p-2 mt-1"
@@ -100,7 +117,12 @@ export default function AddWalletModal() {
                         <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => setData("icon", e.target.files[0])}
+                            onChange={(e) =>
+                                setData((prev) => ({
+                                    ...prev,
+                                    icon: e.target.files?.[0] ?? null,
+                                }))
+                            }
                             className="w-full border rounded p-2 mt-1"
                         />
                     </div>
@@ -113,7 +135,12 @@ export default function AddWalletModal() {
                         <input
                             type="color"
                             value={data.color}
-                            onChange={(e) => setData("color", e.target.value)}
+                            onChange={(e) =>
+                                setData((prev) => ({
+                                    ...prev,
+                                    color: e.target.value,
+                                }))
+                            }
                             className="w-full h-10 border rounded mt-1 cursor-pointer"
                         />
                     </div>
@@ -126,7 +153,10 @@ export default function AddWalletModal() {
                         <textarea
                             value={data.description}
                             onChange={(e) =>
-                                setData("description", e.target.value)
+                                setData((prev) => ({
+                                    ...prev,
+                                    description: e.target.value,
+                                }))
                             }
                             placeholder="Optional description"
                             className="w-full border rounded p-2 mt-1 h-20"

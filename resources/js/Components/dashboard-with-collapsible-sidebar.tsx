@@ -22,19 +22,8 @@ import {
 import Dropdown from "@/Components/Dropdown";
 import {
     ChartContainer,
-    ChartTooltip,
     ChartTooltipContent,
 } from "@/Components/line-charts-2";
-import {
-    Dialog,
-    DialogTrigger,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
-    DialogFooter,
-    DialogClose,
-} from "@/Components/ui/dialog";
 import AddWalletModal from "@/Components/Wallets/AddWalletModal";
 
 import {
