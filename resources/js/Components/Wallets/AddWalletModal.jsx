@@ -7,8 +7,9 @@ import {
     DialogTitle,
     DialogTrigger,
     DialogFooter,
-    DialogClose
+    DialogClose,
 } from "@/Components/ui/dialog";
+import { toaster } from "@/Components/ToastProvider";
 
 export default function AddWalletModal() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -22,7 +23,22 @@ export default function AddWalletModal() {
     const submit = (e) => {
         e.preventDefault();
         post(route("wallets.store"), {
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                reset();
+
+                toaster.create({
+                    title: "Wallet Created!",
+                    description: "Your new wallet has been added successfully.",
+                    type: "success",
+                });
+            },
+            onError: () => {
+                toaster.create({
+                    title: "Error",
+                    description: "Please fix the errors and try again.",
+                    type: "error",
+                });
+            },
         });
     };
 
@@ -43,7 +59,9 @@ export default function AddWalletModal() {
                 <form onSubmit={submit} className="space-y-4 py-2">
                     {/* Wallet Name */}
                     <div>
-                        <label className="text-sm font-medium">Wallet Name</label>
+                        <label className="text-sm font-medium">
+                            Wallet Name
+                        </label>
                         <input
                             type="text"
                             value={data.name}
@@ -51,16 +69,24 @@ export default function AddWalletModal() {
                             placeholder="Enter wallet name"
                             className="w-full border rounded p-2 mt-1"
                         />
-                        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+                        {errors.name && (
+                            <p className="text-red-500 text-sm">
+                                {errors.name}
+                            </p>
+                        )}
                     </div>
 
                     {/* Initial Value */}
                     <div>
-                        <label className="text-sm font-medium">Initial Value</label>
+                        <label className="text-sm font-medium">
+                            Initial Value
+                        </label>
                         <input
                             type="number"
                             value={data.starting_balance}
-                            onChange={(e) => setData("starting_balance", e.target.value)}
+                            onChange={(e) =>
+                                setData("starting_balance", e.target.value)
+                            }
                             placeholder="₱0.00"
                             className="w-full border rounded p-2 mt-1"
                         />
@@ -68,7 +94,9 @@ export default function AddWalletModal() {
 
                     {/* Wallet Icon */}
                     <div>
-                        <label className="text-sm font-medium">Wallet Icon</label>
+                        <label className="text-sm font-medium">
+                            Wallet Icon
+                        </label>
                         <input
                             type="file"
                             accept="image/*"
@@ -79,7 +107,9 @@ export default function AddWalletModal() {
 
                     {/* Wallet Color */}
                     <div>
-                        <label className="text-sm font-medium">Wallet Color</label>
+                        <label className="text-sm font-medium">
+                            Wallet Color
+                        </label>
                         <input
                             type="color"
                             value={data.color}
@@ -90,10 +120,14 @@ export default function AddWalletModal() {
 
                     {/* Wallet Description */}
                     <div>
-                        <label className="text-sm font-medium">Wallet Description</label>
+                        <label className="text-sm font-medium">
+                            Wallet Description
+                        </label>
                         <textarea
                             value={data.description}
-                            onChange={(e) => setData("description", e.target.value)}
+                            onChange={(e) =>
+                                setData("description", e.target.value)
+                            }
                             placeholder="Optional description"
                             className="w-full border rounded p-2 mt-1 h-20"
                         />
