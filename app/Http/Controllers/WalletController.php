@@ -12,7 +12,7 @@ class WalletController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|unique:wallets,name|string|max:255',
             'starting_balance' => 'required|numeric|min:0',
             'color' => 'nullable|string|max:20',
             'icon' => 'nullable|image|max:2048',

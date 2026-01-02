@@ -6,19 +6,27 @@ import { Link, usePage } from "@inertiajs/react";
 import { PropsWithChildren, ReactNode, useState } from "react";
 import { Example } from "@/Components/dashboard-with-collapsible-sidebar";
 import ToastProvider from "@/Components/ToastProvider";
+import type { WalletModel } from "@/types/wallet";
 
 export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    const user = usePage().props.auth.user;
+    const { auth, wallets } = usePage().props as {
+    auth: { user: any };
+    wallets?: WalletModel[];
+};
+
+
+    const user = auth.user;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+
     return (
         <div className="min-h-screen bg-gray-100">
-            <Example />
+            <Example wallets={wallets ?? []} />
             <nav className="border-b border-gray-100 bg-white">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">

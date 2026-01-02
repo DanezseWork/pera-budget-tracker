@@ -8,8 +8,6 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ wallets }: DashboardProps) {
-    console.log("Wallets from backend:", wallets);
-
     return (
         <AuthenticatedLayout
             header={
@@ -18,7 +16,6 @@ export default function Dashboard({ wallets }: DashboardProps) {
                 </h2>
             }
         >
-            <WalletStatsGrid wallets={wallets} />
 
             <Head title="Dashboard" />
 
