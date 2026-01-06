@@ -10,6 +10,7 @@ import {
     DialogClose,
 } from "@/Components/ui/dialog";
 import { toaster } from "@/Components/ToastProvider";
+import { useState } from "react";
 
 interface WalletForm {
     name: string;
@@ -28,6 +29,8 @@ export default function AddWalletModal() {
             color: "#000000",
             description: "",
         });
+    
+    const [open, setOpen] = useState(false);
 
     const typedErrors = errors as Record<keyof WalletForm, string | undefined>;
 
@@ -36,6 +39,7 @@ export default function AddWalletModal() {
         post(route("wallets.store"), {
             onSuccess: () => {
                 reset();
+                setOpen(false); // ✅ CLOSE MODAL
 
                 toaster.create({
                     title: "Wallet Created!",
@@ -54,9 +58,11 @@ export default function AddWalletModal() {
     };
 
     return (
-        <Dialog>
-            <DialogTrigger className="px-4 py-2 mb-2 bg-primary text-white rounded">
-                Add Wallet
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+                <button className="px-4 py-2 mb-2 bg-primary text-white rounded">
+                    Add Wallet
+                </button>
             </DialogTrigger>
 
             <DialogContent>
