@@ -32,13 +32,17 @@ export default function Login({
         <GuestLayout>
             <Head title="Log in" />
 
+            <h1 className="lg:text-5xl text-3xl font-bold tracking-tight text-gray-900 mb-5">
+                Login
+            </h1>
+
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
                     {status}
                 </div>
             )}
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className="w-1/2">
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 

@@ -1,19 +1,27 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren } from "react";
+import GuestNavbar from "@/Components/Guest/GuestNavbar";
+import DotGrid from "@/Components/DotGrid";
 
-export default function Guest({ children }: PropsWithChildren) {
+export default function GuestLayout({ children }: PropsWithChildren) {
     return (
-        <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
-            <div>
-                {/* <Link href="/">
-                    <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
-                </Link> */}
+        <div className="relative min-h-screen overflow-hidden">
+            {/* DOT BACKGROUND */}
+            <div className="absolute inset-0 -z-10">
+                <DotGrid
+                    dotSize={3}
+                    gap={15}
+                    baseColor="#E8E6FF"
+                    proximity={0}
+                    shockRadius={0}
+                />
             </div>
 
-            <div className="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
+            <GuestNavbar brand="Pera" />
+
+            {/* FOREGROUND CONTENT */}
+            <main className="min-h-screen flex flex-col items-center justify-center">
                 {children}
-            </div>
+            </main>
         </div>
     );
 }

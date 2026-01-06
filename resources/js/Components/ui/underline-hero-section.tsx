@@ -7,45 +7,6 @@ const cn = (...inputs: Array<string | false | null | undefined>) => {
     return inputs.filter(Boolean).join(" ");
 };
 
-/* LOCAL styles only — no external requests, no globals */
-const LocalStyles = () => (
-    <style>{`
-    /* small decorative underline used in hero (keeps things self-contained) */
-    .hero-underline { position: absolute; left: 0; width: 100%; top: 100%; margin-top: -5px; pointer-events: none; }
-
-    /* fade-up animation */
-    @keyframes fade-in-up {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in-up { animation: fade-in-up 0.6s ease-out both; }
-    .animate-fade-in-up-delay-1 { animation-delay: 0.2s; }
-    .animate-fade-in-up-delay-2 { animation-delay: 0.4s; }
-
-    /* Button baseline - NO hover effects */
-    .btn-base {
-      transition: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Keyboard-style bounce animation */
-    @keyframes btn-bounce {
-      0% { transform: scale(1); }
-      50% { transform: scale(0.95); }
-      100% { transform: scale(1); }
-    }
-    .btn-bounce-anim {
-      animation: btn-bounce 0.3s cubic-bezier(0.36, 0, 0.66, -0.56);
-    }
-
-    .btn-focus-ring:focus-visible { outline: 2px solid hsl(var(--foreground)); outline-offset: 3px; }
-
-    /* fallback focus outline */
-    .focus-outline:focus-visible { outline: 2px solid hsl(var(--foreground)); outline-offset: 2px; }
-  `}</style>
-);
 
 /* cva for button - pure black and white */
 const buttonVariants = cva(
@@ -185,25 +146,6 @@ const Navigation: React.FC<{ brand?: string; onSignIn?: () => void }> = ({
 
                     {/* Desktop */}
                     <div className="hidden md:flex items-center space-x-8">
-                        {/* {navItems.map((item) => (
-                            <a
-                                key={item.id}
-                                href={`#${item.id}`}
-                                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-outline"
-                            >
-                                {item.label}
-                            </a>
-                        ))} */}
-
-                        {/* <Button
-                            size="sm"
-                            variant="default"
-                            className="focus-outline"
-                            onClick={() => onSignIn?.()}
-                        >
-                            Sign In
-                        </Button> */}
-
                         <Link href={route("login")}>
                             <Button
                                 size="sm"
@@ -345,7 +287,7 @@ const Component: React.FC<ComponentProps> = ({
 }) => {
     return (
         <div className="min-h-screen text-foreground">
-            <LocalStyles />
+            {/* <LocalStyles /> */}
             <Navigation brand={brand} onSignIn={onSignIn} />
             <Hero heroClassName={heroClassName} />
         </div>
