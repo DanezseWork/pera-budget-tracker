@@ -11,11 +11,12 @@ import {
 } from "@/Components/ui/dialog";
 import { toaster } from "@/Components/ToastProvider";
 import { useState } from "react";
+import { WALLET_ICONS, WalletIconKey } from "@/constants/wallet-icons";
 
 interface WalletForm {
     name: string;
     starting_balance: string;
-    icon: File | null;
+    icon: WalletIconKey;
     color: string;
     description: string;
 }
@@ -25,11 +26,11 @@ export default function AddWalletModal() {
         useForm<WalletForm>({
             name: "",
             starting_balance: "",
-            icon: null as File | null,
+            icon: "wallet",
             color: "#000000",
             description: "",
         });
-    
+
     const [open, setOpen] = useState(false);
 
     const typedErrors = errors as Record<keyof WalletForm, string | undefined>;
@@ -117,20 +118,40 @@ export default function AddWalletModal() {
 
                     {/* Wallet Icon */}
                     <div>
-                        <label className="text-sm font-medium">
+                        <label className="text-sm font-medium mb-2 block">
                             Wallet Icon
                         </label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) =>
-                                setData((prev) => ({
-                                    ...prev,
-                                    icon: e.target.files?.[0] ?? null,
-                                }))
-                            }
-                            className="w-full border rounded p-2 mt-1"
-                        />
+
+                        <div className="grid grid-cols-6 gap-3">
+                            {Object.entries(WALLET_ICONS).map(([key, Icon]) => {
+                                const isSelected = data.icon === key;
+
+                                return (
+                                    <button
+                                        key={key}
+                                        type="button"
+                                        onClick={() =>
+                                            setData((prev) => ({
+                                                ...prev,
+                                                icon: key as WalletIconKey,
+                                            }))
+                                        }
+                                        className={`
+                                            p-3 rounded-lg border flex items-center justify-center
+                                            transition
+                                            ${
+                                                isSelected
+                                                    ? "border-primary bg-primary/10 ring-2 ring-primary/30"
+                                                    : "border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                            }
+                                        `}
+                                        title={key}
+                                    >
+                                        <Icon className="h-5 w-5" />
+                                    </button>
+                                );
+                            })}
+                        </div>
                     </div>
 
                     {/* Wallet Color */}

@@ -1,4 +1,5 @@
-// resources/js/types/wallet.ts
+import type { WalletIconKey } from "@/constants/wallet-icons";
+
 export interface WalletModel {
   id: number;
   user_id: number;
@@ -7,6 +8,6 @@ export interface WalletModel {
   starting_balance: number;
   current_balance: number;
   color: string | null;
-  icon?: string | null;
+  icon: WalletIconKey | null;
   description?: string | null;
 }

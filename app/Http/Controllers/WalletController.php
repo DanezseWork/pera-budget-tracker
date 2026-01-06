@@ -15,7 +15,7 @@ class WalletController extends Controller
             'name' => 'required|unique:wallets,name|string|max:255',
             'starting_balance' => 'required|numeric|min:0',
             'color' => 'nullable|string|max:20',
-            'icon' => 'nullable|image|max:2048',
+            'icon' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
 
