@@ -55,7 +55,7 @@ export default function AddWalletModal() {
 
     return (
         <Dialog>
-            <DialogTrigger className="px-4 py-2 bg-primary text-white rounded">
+            <DialogTrigger className="px-4 py-2 mb-2 bg-primary text-white rounded">
                 Add Wallet
             </DialogTrigger>
 

@@ -1,7 +1,8 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import WalletStatsGrid from "@/Components/Wallets/WalletStatsGrid";
 import type { WalletModel } from "@/types/wallet";
+import AddWalletModal from "@/Components/Wallets/AddWalletModal";
 
 interface DashboardProps {
     wallets: WalletModel[];
@@ -9,25 +10,13 @@ interface DashboardProps {
 
 export default function Dashboard({ wallets }: DashboardProps) {
     return (
-        <AuthenticatedLayout
-            header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Dashboard
-                </h2>
-            }
-        >
-
+        <AuthenticatedLayout pageKey="Dashboard">
             <Head title="Dashboard" />
 
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            You're logged in!
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {/* Add Wallet Modal */}
+            <AddWalletModal />
+
+            <WalletStatsGrid wallets={wallets} />
         </AuthenticatedLayout>
     );
 }
