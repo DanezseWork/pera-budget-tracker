@@ -58,12 +58,8 @@ export default function Sidebar({ selected, onSelect }: SidebarProps) {
 
             <div className="space-y-1 mb-8">
                 <Option Icon={Home} title="Dashboard" {...{ selected, onSelect, open }} />
-                <Option Icon={DollarSign} title="Sales" notifs={3} {...{ selected, onSelect, open }} />
-                <Option Icon={Monitor} title="View Site" {...{ selected, onSelect, open }} />
-                <Option Icon={ShoppingCart} title="Products" {...{ selected, onSelect, open }} />
-                <Option Icon={Tag} title="Tags" {...{ selected, onSelect, open }} />
+                <Option Icon={DollarSign} title="Transactions" notifs={3} {...{ selected, onSelect, open }} />
                 <Option Icon={BarChart3} title="Analytics" {...{ selected, onSelect, open }} />
-                <Option Icon={Users} title="Members" notifs={12} {...{ selected, onSelect, open }} />
             </div>
 
             {open && (
