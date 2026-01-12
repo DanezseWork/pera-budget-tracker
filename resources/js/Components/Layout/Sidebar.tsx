@@ -33,7 +33,8 @@ type OptionProps = {
 
 const SIDEBAR_ROUTES: Record<string, string> = {
     Dashboard: route("dashboard"),
-    Sales: "/sales",        // placeholder
+    Transactions: route("transactions.index"), // ✅ updated
+    Sales: "/sales", // placeholder
     "View Site": "/",
     Products: "/products",
     Tags: "/tags",
@@ -41,6 +42,7 @@ const SIDEBAR_ROUTES: Record<string, string> = {
     Members: "/members",
     Settings: "/settings",
 };
+
 
 /* ================= COMPONENT ================= */
 

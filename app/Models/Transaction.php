@@ -10,8 +10,6 @@ class Transaction extends Model
         'wallet_id',
         'amount',
         'type',
-        'category_id',
-        'account_id',
         'user_id',
         'date',
         'description',

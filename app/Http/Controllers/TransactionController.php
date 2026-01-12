@@ -8,6 +8,7 @@ use App\Models\WalletTransfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class TransactionController extends Controller
 {
@@ -117,4 +118,25 @@ class TransactionController extends Controller
 
         return back()->with('success', 'Transaction completed successfully.');
     }
+
+        public function index()
+    {
+        $transactions = Transaction::query()
+            ->with('wallet:id,name')
+            ->where('user_id', Auth::id())
+            ->orderBy('date', 'desc') // ✅ latest first
+            ->get([
+                'id',
+                'wallet_id',
+                'amount',
+                'type',
+                'date',
+                'description',
+            ]);
+
+        return Inertia::render('Transactions/Index', [
+            'transactions' => $transactions,
+        ]);
+    }
 }
+

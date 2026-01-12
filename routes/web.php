@@ -19,16 +19,19 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+        ->middleware(['auth', 'verified'])
+        ->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/wallets', [WalletController::class, 'store'])->name('wallets.store');
-    // routes/web.php
-    Route::post('/transactions', [TransactionController::class, 'store'])
-    ->name('transactions.store');
 
+    Route::post('/wallets', [WalletController::class, 'store'])->name('wallets.store');
+
+    Route::post('/transactions', [TransactionController::class, 'store'])
+        ->name('transactions.store');
+    Route::get('/transactions', [TransactionController::class, 'index'])
+        ->middleware('auth')
+        ->name('transactions.index');
 });
 
 require __DIR__ . '/auth.php';
