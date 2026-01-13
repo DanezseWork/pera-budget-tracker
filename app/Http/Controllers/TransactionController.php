@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Wallet;
 use App\Models\Transaction;
+use App\Models\Wallet;
 use App\Models\WalletTransfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -119,12 +119,12 @@ class TransactionController extends Controller
         return back()->with('success', 'Transaction completed successfully.');
     }
 
-        public function index()
+    public function index()
     {
         $transactions = Transaction::query()
             ->with('wallet:id,name')
             ->where('user_id', Auth::id())
-            ->orderBy('date', 'desc') // ✅ latest first
+            ->orderBy('date', 'desc')  // ✅ latest first
             ->get([
                 'id',
                 'wallet_id',
@@ -132,6 +132,7 @@ class TransactionController extends Controller
                 'type',
                 'date',
                 'description',
+                'created_at',
             ]);
 
         return Inertia::render('Transactions/Index', [
@@ -139,4 +140,3 @@ class TransactionController extends Controller
         ]);
     }
 }
-
