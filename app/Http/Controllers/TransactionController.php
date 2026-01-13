@@ -121,6 +121,8 @@ class TransactionController extends Controller
 
     public function index()
     {
+        $userId = Auth::id();
+
         $transactions = Transaction::query()
             ->with('wallet:id,name')
             ->where('user_id', Auth::id())
@@ -135,8 +137,11 @@ class TransactionController extends Controller
                 'created_at',
             ]);
 
+        $wallets = Wallet::where('user_id', $userId)->get();
+
         return Inertia::render('Transactions/Index', [
             'transactions' => $transactions,
+            'wallets' => $wallets,
         ]);
     }
 }

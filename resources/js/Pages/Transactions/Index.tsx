@@ -10,13 +10,15 @@ import {
     useReactTable,
 } from "@tanstack/react-table";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { ArrowUpRight, ArrowDownRight, Search } from "lucide-react";
+import { Search } from "lucide-react";
+import TransactionModal from "@/Components/Wallets/TransactionModal";
+import { WalletModel } from "@/types/wallet";
 
 type Transaction = {
     id: number;
     amount: number;
     type: "add" | "subtract" | "transfer_in" | "transfer_out";
-    date: string;
+    date?: string | null;
     description?: string;
     created_at: string;
     wallet: {
@@ -46,11 +48,12 @@ const TYPE_STYLES: Record<
     },
 };
 
-export default function Index({
-    transactions,
-}: {
+interface IndexProps {
     transactions: Transaction[];
-}) {
+    wallets: WalletModel[];
+}
+
+export default function Index({ transactions, wallets }: IndexProps) {
     const [globalFilter, setGlobalFilter] = useState("");
 
     const columns = useMemo<ColumnDef<Transaction>[]>(
@@ -78,9 +81,6 @@ export default function Index({
                 cell: ({ row }) => {
                     const createdAt = row.original.created_at;
 
-                    console.log(row.original);
-
-
                     if (!createdAt) {
                         return <span className="text-sm text-gray-400">—</span>;
                     }
@@ -98,11 +98,11 @@ export default function Index({
                 },
             },
             {
-                accessorKey: "wallet.name",
                 header: "Wallet",
-                cell: ({ row }) => (
+                accessorFn: (row) => row.wallet.name,
+                cell: ({ getValue }) => (
                     <span className="font-medium text-gray-900">
-                        {row.original.wallet.name}
+                        {getValue<string>()}
                     </span>
                 ),
             },
@@ -160,14 +160,14 @@ export default function Index({
     );
 
     const table = useReactTable({
-        data: transactions,
+        data: transactions ?? [],
         columns,
         state: {
             globalFilter,
         },
         onGlobalFilterChange: setGlobalFilter,
         globalFilterFn: (row, _, value) => {
-            const search = value.toLowerCase();
+            const search = String(value).toLowerCase();
 
             return (
                 row.original.wallet.name.toLowerCase().includes(search) ||
@@ -192,12 +192,17 @@ export default function Index({
         <AuthenticatedLayout pageKey="Transactions">
             <Head title="Transactions" />
 
+            <TransactionModal wallets={wallets ?? []} />
+
             <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
                 {/* Toolbar */}
                 <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
                     <div className="relative w-full max-w-sm">
                         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                         <input
+                            id="transaction-search"
+                            name="transaction-search"
+                            type="search"
                             value={globalFilter}
                             onChange={(e) => setGlobalFilter(e.target.value)}
                             placeholder="Search transactions..."

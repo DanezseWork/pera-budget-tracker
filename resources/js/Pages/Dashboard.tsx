@@ -20,7 +20,6 @@ export default function Dashboard({ wallets }: DashboardProps) {
 
                 <TransactionModal wallets={wallets} />  
             </div>
-            
 
             <WalletStatsGrid wallets={wallets} />
         </AuthenticatedLayout>

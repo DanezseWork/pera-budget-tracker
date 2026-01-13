@@ -60,7 +60,7 @@ export default function Sidebar({ selected, onSelect }: SidebarProps) {
 
             <div className="space-y-1 mb-8">
                 <Option Icon={Home} title="Dashboard" {...{ selected, onSelect, open }} />
-                <Option Icon={DollarSign} title="Transactions" notifs={3} {...{ selected, onSelect, open }} />
+                <Option Icon={DollarSign} title="Transactions" {...{ selected, onSelect, open }} />
                 <Option Icon={BarChart3} title="Analytics" {...{ selected, onSelect, open }} />
             </div>
 
@@ -96,7 +96,7 @@ function Option({ Icon, title, selected, onSelect, open, notifs }: OptionProps) 
             }}
             className={`relative flex h-11 w-full items-center rounded-md transition
                 ${isSelected
-                    ? "bg-blue-50 text-blue-700 border-l-2 border-blue-500"
+                    ? "bg-green-50 text-gree-700 border-l-2 border-green-500"
                     : "text-gray-600 hover:bg-gray-50"}`}
         >
             <div className="grid h-full w-12 place-content-center">
@@ -106,7 +106,7 @@ function Option({ Icon, title, selected, onSelect, open, notifs }: OptionProps) 
             {open && <span className="text-sm font-medium">{title}</span>}
 
             {notifs && open && (
-                <span className="absolute right-3 h-5 w-5 rounded-full bg-blue-500 text-xs text-white grid place-content-center">
+                <span className="absolute right-3 h-5 w-5 rounded-full bg-green-500 text-xs text-white grid place-content-center">
                     {notifs}
                 </span>
             )}
@@ -123,12 +123,12 @@ function TitleSection({ open }: { open: boolean }) {
                     <Logo />
                     {open && (
                         <div>
-                            <span className="block text-sm font-semibold">TomIsLoading</span>
-                            <span className="block text-xs text-gray-500">Pro Plan</span>
+                            <span className="block text-sm font-semibold">Pera</span>
+                            <span className="block text-xs text-gray-500">Budget Tracker</span>
                         </div>
                     )}
                 </div>
-                {open && <ChevronDown className="h-4 w-4 text-gray-400" />}
+                {/* {open && <ChevronDown className="h-4 w-4 text-gray-400" />} */}
             </div>
         </div>
     );
@@ -136,8 +136,8 @@ function TitleSection({ open }: { open: boolean }) {
 
 function Logo() {
     return (
-        <div className="grid size-10 place-content-center rounded-lg bg-blue-600 text-white font-bold">
-            T
+        <div className="grid size-10 place-content-center rounded-lg bg-green-600 text-white font-bold">
+            P
         </div>
     );
 }
