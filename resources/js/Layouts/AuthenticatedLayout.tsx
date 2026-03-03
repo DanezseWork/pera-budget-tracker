@@ -7,27 +7,15 @@ import ToastProvider from "@/Components/ToastProvider";
 const PAGE_META: Record<string, { title: string; subtitle?: string }> = {
     Dashboard: {
         title: "Dashboard",
-        subtitle: "Welcome back to your dashboard",
+        subtitle: "Manage wallets",
     },
-    Sales: {
-        title: "Sales",
-        subtitle: "Track your revenue and transactions",
+    Transactions: {
+        title: "Transactions",
+        subtitle: "Check transaction history",
     },
-    Products: {
-        title: "Products",
-        subtitle: "Manage your inventory and pricing",
-    },
-    Analytics: {
-        title: "Analytics",
-        subtitle: "Insights and performance metrics",
-    },
-    Members: {
-        title: "Members",
-        subtitle: "Manage users and roles",
-    },
-    Settings: {
-        title: "Settings",
-        subtitle: "Configure your preferences",
+    Profile: {
+        title: "Profile",
+        subtitle: "Edit account information",
     },
 };
 
@@ -40,7 +28,6 @@ export default function AuthenticatedLayout({
     pageKey = "Dashboard",
 }: AuthLayoutProps) {
     const { auth } = usePage().props as { auth: { user: any } };
-
     const [selected, setSelected] = useState(pageKey);
     const [isDark, setIsDark] = useState(false);
 

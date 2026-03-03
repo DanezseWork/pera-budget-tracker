@@ -9,7 +9,7 @@ export const buttonVariants = cva(
     {
         variants: {
             variant: {
-                default: "bg-foreground text-background",
+                default: "bg-green-500 hover:bg-green-600 text-background",
                 outline: "border-2 border-foreground bg-background text-foreground",
                 ghost: "bg-transparent text-foreground",
             },

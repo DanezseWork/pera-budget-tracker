@@ -11,6 +11,11 @@ import {
     HelpCircle,
     ChevronDown,
     ChevronsRight,
+    LogOut,
+    User,
+    Link,
+    PhilippinePeso,
+    Banknote,
 } from "lucide-react";
 import { router } from "@inertiajs/react";
 
@@ -40,7 +45,8 @@ const SIDEBAR_ROUTES: Record<string, string> = {
     Tags: "/tags",
     Analytics: "/analytics",
     Members: "/members",
-    Settings: "/settings",
+    Profile: route("profile.edit"),
+    Logout: route("logout"),
 };
 
 
@@ -60,17 +66,12 @@ export default function Sidebar({ selected, onSelect }: SidebarProps) {
 
             <div className="space-y-1 mb-8">
                 <Option Icon={Home} title="Dashboard" {...{ selected, onSelect, open }} />
-                <Option Icon={DollarSign} title="Transactions" {...{ selected, onSelect, open }} />
-                <Option Icon={BarChart3} title="Analytics" {...{ selected, onSelect, open }} />
+                <Option Icon={Banknote} title="Transactions" {...{ selected, onSelect, open }} />
             </div>
 
             {open && (
                 <div className="border-t border-gray-200 dark:border-gray-800 pt-4 space-y-1">
-                    <div className="px-3 py-2 text-xs font-medium text-gray-500 uppercase">
-                        Account
-                    </div>
-                    <Option Icon={Settings} title="Settings" {...{ selected, onSelect, open }} />
-                    <Option Icon={HelpCircle} title="Help & Support" {...{ selected, onSelect, open }} />
+                    <Option Icon={User} title="Profile" {...{ selected, onSelect, open }} />   
                 </div>
             )}
 
@@ -137,7 +138,7 @@ function TitleSection({ open }: { open: boolean }) {
 function Logo() {
     return (
         <div className="grid size-10 place-content-center rounded-lg bg-green-600 text-white font-bold">
-            P
+            <PhilippinePeso />
         </div>
     );
 }

@@ -12,6 +12,8 @@ import {
 import { toaster } from "@/Components/ToastProvider";
 import { useState } from "react";
 import { WALLET_ICONS, WalletIconKey } from "@/constants/wallet-icons";
+import { Button } from "../ui/button";
+import { Plus } from "lucide-react";
 
 interface WalletForm {
     name: string;
@@ -61,9 +63,10 @@ export default function AddWalletModal() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <button className="px-4 py-2 bg-primary text-white rounded">
+                <Button>
+                    <Plus />
                     Add Wallet
-                </button>
+                </Button>
             </DialogTrigger>
 
             <DialogContent>

@@ -11,6 +11,8 @@ import {
 import { useState } from "react";
 import { toaster } from "@/Components/ToastProvider";
 import type { WalletModel } from "@/types/wallet";
+import { Button } from "../ui/button";
+import { HandCoins } from "lucide-react";
 
 type TransactionType = "add" | "subtract" | "transfer";
 
@@ -58,9 +60,10 @@ export default function TransactionModal({ wallets }: Props) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <button className="px-4 py-2 bg-primary text-white rounded">
+                <Button>
+                    <HandCoins />
                     New Transaction
-                </button>
+                </Button>
             </DialogTrigger>
 
             <DialogContent>
