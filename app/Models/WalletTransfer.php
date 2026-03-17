@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class WalletTransfer extends Model
 {
     protected $table = 'wallet_transfers';
-d
     protected $fillable = [
         'from_wallet_id',
         'to_wallet_id',

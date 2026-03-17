@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { usePage } from "@inertiajs/react";
-import Sidebar from "@/Components/Layout/Sidebar";
-import PageHeader from "@/Components/Layout/PageHeader";
+import Sidebar from "@/Components/auth/Sidebar";
+import PageHeader from "@/Components/auth/PageHeader";
 import ToastProvider from "@/Components/ToastProvider";
 
 const PAGE_META: Record<string, { title: string; subtitle?: string }> = {

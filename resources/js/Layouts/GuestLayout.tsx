@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import GuestNavbar from "@/Components/Guest/GuestNavbar";
+import GuestNavbar from "@/Components/guest/GuestNavbar";
 import DotGrid from "@/Components/DotGrid";
 
 export default function GuestLayout({ children }: PropsWithChildren) {

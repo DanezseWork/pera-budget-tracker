@@ -11,7 +11,7 @@ import {
 } from "@tanstack/react-table";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Search } from "lucide-react";
-import TransactionModal from "@/Components/Wallets/TransactionModal";
+import TransactionModal from "@/Components/wallets/TransactionModal";
 import { WalletModel } from "@/types/wallet";
 
 type Transaction = {
@@ -88,7 +88,7 @@ export default function Index({ transactions, wallets }: IndexProps) {
                     return (
                         <span className="text-sm text-gray-500">
                             {new Date(
-                                createdAt.replace(" ", "T")
+                                createdAt.replace(" ", "T"),
                             ).toLocaleTimeString([], {
                                 hour: "2-digit",
                                 minute: "2-digit",
@@ -156,7 +156,7 @@ export default function Index({ transactions, wallets }: IndexProps) {
                 },
             },
         ],
-        []
+        [],
     );
 
     const table = useReactTable({
@@ -224,7 +224,7 @@ export default function Index({ transactions, wallets }: IndexProps) {
                                         >
                                             {flexRender(
                                                 header.column.columnDef.header,
-                                                header.getContext()
+                                                header.getContext(),
                                             )}
                                         </th>
                                     ))}
@@ -242,7 +242,7 @@ export default function Index({ transactions, wallets }: IndexProps) {
                                         <td key={cell.id} className="px-6 py-4">
                                             {flexRender(
                                                 cell.column.columnDef.cell,
-                                                cell.getContext()
+                                                cell.getContext(),
                                             )}
                                         </td>
                                     ))}
