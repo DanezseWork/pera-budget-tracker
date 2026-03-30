@@ -8,6 +8,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('transactions', function (Blueprint $table) {
+            $table->dropForeign(['account_id']);
+            $table->dropForeign(['category_id']);
+
             $table->dropColumn(['account_id', 'category_id']);
         });
     }
